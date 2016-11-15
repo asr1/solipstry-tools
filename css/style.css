@@ -1,38 +1,55 @@
-#banner{
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  height: 110px;
-  width: 100%;
-  background-color: #208C41;
-  color: #fff;
-	box-shadow: 0px 0px 30px #777777;
+#banner {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 110px;
+    width: 100%;
+    background-color: #208C41;
+    color: #fff;
+    box-shadow: 0px 0px 30px #777777;
+    font-family: ingelby;
 }
-
-#sidebar{
-  position: absolute;
-  background-color: #106C31;
-  top: 110px;
-  left: 0px;
-  width: 250px;
-  height: 100%;
+#sidebar {
+    position: absolute;
+    font-family: ingelby;
+    background-color: #106C31;
+    top: 110px;
+    left: 0px;
+    width: 250px;
+    height: 100%;
 }
-
-.filter{
-  color: #000;
+.filter {
+    color: #000;
 }
-
 .filterCheckBox {
-  margin-top: 0px!important;
-  margin-bottom: 0px!important;
+    margin-top: 0px!important;
+    margin-bottom: 0px!important;
 }
-
-.filterBody{
-  padding-top: 5px!important;
-  padding-bottom: 5px!important;
+.filterBody {
+    padding-top: 5px!important;
+    padding-bottom: 5px!important;
 }
-
-#content{
-  margin-left: 260px;
-  margin-top: 125px;
+#content {
+    font-family: ingelby;
+    margin-left: 260px;
+    margin-top: 125px;
+}
+.table-striped>tbody>tr:nth-child(2n+1)>td, .table-striped>tbody>tr:nth-child(2n+1)>th {
+    background-color: #106c31;
+    color: #fff;
+    padding: 4px;
+}
+.table-striped>tbody>tr:nth-child(2n)>td, .table-striped>tbody>tr:nth-child(2n)>th {
+    background-color: #208C41;
+    color: #fff;
+    padding: 4px;
+}
+.table-striped>tbody>tr>td {}
+.table-striped>tbody>tr>th {
+    text-align: right;
+    padding-right: 8px!important;
+}
+@font-face {
+    font-family: ingelby;
+    src: url('../fonts/Ingleby_regular.ttf');
 }

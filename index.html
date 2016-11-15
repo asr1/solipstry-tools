@@ -1,171 +1,227 @@
 <!doctype html>
 <html>
-  <head>
-  <meta charset="utf-8">
-  <title>Solipstry: Rogue's Gallery</title>
 
-  <!--Stylesheet Import -->
-  <link rel="stylesheet" href="css\style.css"/>
-  <!-- Bootstrap Stylesheet Import -->
-  <link rel="stylesheet" href="js\bootstrap-3.3.7-dist\css\bootstrap.css"/>
-  <link href="js/magicsuggest/magicsuggest-min.css" rel="stylesheet">
+<head>
+    <meta charset="utf-8">
+    <title>Solipstry: Rogue's Gallery</title>
 
-
-  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <!--Stylesheet Import -->
+    <link rel="stylesheet" href="css\style.css" />
+    <!-- Bootstrap Stylesheet Import -->
+    <link rel="stylesheet" href="js\bootstrap-3.3.7-dist\css\bootstrap.css" />
+    <link href="js/magicsuggest/magicsuggest-min.css" rel="stylesheet">
 
 
-  <!-- Javascript -->
-<!--  <script src="js\jquery-3.1.1.min.js"></script>-->
-  <script src="js\bootstrap-3.3.7-dist\js\bootstrap.js"></script>
-  <script src="js/magicsuggest/magicsuggest-min.js"></script>
-  <script src="js\roguesgallery.js"></script>
-  <!-- Socket Import, for later -->
-  <!--<script src="http://10.26.65.192:5000/socket.io/socket.io.js"></script>0-->
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 
-  </head>
-  <body>
+
+    <!-- Javascript -->
+    <!--  <script src="js\jquery-3.1.1.min.js"></script>-->
+    <script src="js\bootstrap-3.3.7-dist\js\bootstrap.js"></script>
+    <script src="js/magicsuggest/magicsuggest-min.js"></script>
+    <script src="js\roguesgallery.js"></script>
+    <!-- Socket Import, for later -->
+    <!--<script src="http://10.26.65.192:5000/socket.io/socket.io.js"></script>0-->
+
+</head>
+
+<body>
     <!-- Banner -->
     <div id="banner" class="container-fluid navbar navbar-default">
-      <div class="row">
-        <div class="col-xs-4">
-          <h1>Rogue's Gallery</h1>
+        <div class="row">
+            <div class="col-xs-4">
+                <h1>Rogue's Gallery</h1>
+            </div>
+            <div class="col-xs-7" style="padding-right: 0px; margin-top: 22px;">
+                <input type="text" class="form-control" id="searchBar" />
+            </div>
+            <div class="col-xs-1" style="padding-left: 0px; margin-top: 22px;">
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+            </div>
         </div>
-        <div class="col-xs-7" style="padding-right: 0px; margin-top: 22px;">
-          <input type="text" class="form-control" id="searchBar"/>
-        </div>
-        <div class="col-xs-1" style="padding-left: 0px; margin-top: 22px;">
-          <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-        </div>
-      </div>
     </div>
     <div id="sidebar">
-      <br>
-      <div class="panel-group" style="padding-left: 5px;padding-right: 5px; margin-bottom: 3px;">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title">
+        <br>
+        <div class="panel-group" style="padding-left: 5px;padding-right: 5px; margin-bottom: 3px;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
               <div class="checkbox filterCheckBox">
                 <label><input type="checkbox" value=""><a data-toggle="collapse" class="filter" href="#collapseMons">Monsters</a></label>
               </div>
             </h4>
-          </div>
-          <div id="collapseMons" class="panel-collapse collapse">
-            <div class="panel-body filterBody"><div class="checkbox filterCheckBox">
-              <label>
-                <input type="checkbox" value="">
-                  <a data-toggle="collapse" class="filter" href="#collapseMons">
+                </div>
+                <div id="collapseMons" class="panel-collapse collapse">
+                    <div class="panel-body filterBody">
+                        <div class="checkbox filterCheckBox">
+                            <label>
+                                <input type="checkbox" value="">
+                                <a data-toggle="collapse" class="filter" href="#collapseMons">
                     Homebrew
                   </a>
-                </label>
-            </div></div>
-            <div class="panel-footer"></div>
-          </div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="panel-footer"></div>
+                </div>
+            </div>
         </div>
-      </div>
 
-      <div class="panel-group" style="padding-left: 5px;padding-right: 5px; margin-bottom: 3px;">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title">
+        <div class="panel-group" style="padding-left: 5px;padding-right: 5px; margin-bottom: 3px;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
               <div class="checkbox filterCheckBox">
                 <label><input type="checkbox" value=""><a data-toggle="collapse" class="filter" href="#collapseMaps">
                   Maps
                 </a></label>
               </div>
             </h4>
-          </div>
-          <div id="collapseMaps" class="panel-collapse collapse">
-            <div class="panel-body filterBody"><div class="checkbox filterCheckBox">
-              <label>
-                <input type="checkbox" value="">
-                  <a data-toggle="collapse" class="filter" href="#collapseMaps">
+                </div>
+                <div id="collapseMaps" class="panel-collapse collapse">
+                    <div class="panel-body filterBody">
+                        <div class="checkbox filterCheckBox">
+                            <label>
+                                <input type="checkbox" value="">
+                                <a data-toggle="collapse" class="filter" href="#collapseMaps">
                     Homebrew
                   </a>
-                </label>
-            </div></div>
-            <div class="panel-footer"></div>
-          </div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="panel-footer"></div>
+                </div>
+            </div>
         </div>
-      </div>
 
-      <div class="panel-group" style="padding-left: 5px;padding-right: 5px; margin-bottom: 3px;">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title">
+        <div class="panel-group" style="padding-left: 5px;padding-right: 5px; margin-bottom: 3px;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
               <div class="checkbox filterCheckBox">
                 <label><input type="checkbox" value=""><a data-toggle="collapse" class="filter" href="#collapseSpells">
                   Spells
                 </a></label>
               </div>
             </h4>
-          </div>
-          <div id="collapseSpells" class="panel-collapse collapse">
-            <div class="panel-body filterBody"><div class="checkbox filterCheckBox">
-              <label>
-                <input type="checkbox" value="">
-                  <a data-toggle="collapse" class="filter" href="#collapseSpells">
+                </div>
+                <div id="collapseSpells" class="panel-collapse collapse">
+                    <div class="panel-body filterBody">
+                        <div class="checkbox filterCheckBox">
+                            <label>
+                                <input type="checkbox" value="">
+                                <a data-toggle="collapse" class="filter" href="#collapseSpells">
                     Homebrew
                   </a>
-                </label>
-            </div></div>
-            <div class="panel-footer"></div>
-          </div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="panel-footer"></div>
+                </div>
+            </div>
         </div>
-      </div>
 
-      <div class="panel-group" style="padding-left: 5px;padding-right: 5px; margin-bottom: 3px;">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title">
+        <div class="panel-group" style="padding-left: 5px;padding-right: 5px; margin-bottom: 3px;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
               <div class="checkbox filterCheckBox">
                 <label><input type="checkbox" value=""><a data-toggle="collapse" class="filter" href="#collapseCamp">
                   Campaigns
                 </a></label>
               </div>
             </h4>
-          </div>
-          <div id="collapseCamp" class="panel-collapse collapse">
-            <div class="panel-body filterBody"><div class="checkbox filterCheckBox">
-              <label>
-                <input type="checkbox" value="">
-                  <a data-toggle="collapse" class="filter" href="#collapseCamp">
+                </div>
+                <div id="collapseCamp" class="panel-collapse collapse">
+                    <div class="panel-body filterBody">
+                        <div class="checkbox filterCheckBox">
+                            <label>
+                                <input type="checkbox" value="">
+                                <a data-toggle="collapse" class="filter" href="#collapseCamp">
                     Homebrew
                   </a>
-                </label>
-            </div></div>
-            <div class="panel-footer"></div>
-          </div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="panel-footer"></div>
+                </div>
+            </div>
         </div>
-      </div>
 
-      <div class="panel-group" style="padding-left: 5px;padding-right: 5px; margin-bottom: 3px;">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title">
+        <div class="panel-group" style="padding-left: 5px;padding-right: 5px; margin-bottom: 3px;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
               <div class="checkbox filterCheckBox">
                 <label><input type="checkbox" value=""><a data-toggle="collapse" class="filter" href="#collapseEquip">
                   Equipment
                 </a></label>
               </div>
             </h4>
-          </div>
-          <div id="collapseEquip" class="panel-collapse collapse">
-            <div class="panel-body filterBody"><div class="checkbox filterCheckBox">
-              <label>
-                <input type="checkbox" value="">
-                  <a data-toggle="collapse" class="filter" href="#collapseEquip">
+                </div>
+                <div id="collapseEquip" class="panel-collapse collapse">
+                    <div class="panel-body filterBody">
+                        <div class="checkbox filterCheckBox">
+                            <label>
+                                <input type="checkbox" value="">
+                                <a data-toggle="collapse" class="filter" href="#collapseEquip">
                     Homebrew
                   </a>
-                </label>
-            </div></div>
-            <div class="panel-footer"></div>
-          </div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="panel-footer"></div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
     <!-- End Banner -->
     <!-- Content -->
-    <div class="container-fluid" id="content" >
-      This is stuff
+    <div class="container-fluid" id="content">
+        <div class="col-sm-2 table-responsive">
+            <table class="table table-striped">
+                <tr>
+                    <th>Hit Points:</th>
+                    <td>20</td>
+                </tr>
+                <tr>
+                    <th>Armor Class:</th>
+                    <td>16</td>
+                </tr>
+                <tr>
+                    <th>Reflex:</th>
+                    <td>12</td>
+                </tr>
+                <tr>
+                    <th>Fortitude:</th>
+                    <td>12</td>
+                </tr>
+                <tr>
+                    <th>Will:</th>
+                    <td>12</td>
+                </tr>
+                <tr>
+                    <th>Movement:</th>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <th>Initiative:</th>
+                    <td>+2</td>
+                </tr>
+                <tr>
+                    <th>Attack:</th>
+                    <td>+4</td>
+                </tr>
+                <tr>
+                    <th>Damage:</th>
+                    <td>1d6 * 7</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-sm-8">
+
+              This is stuff
+        </div>
     </div>
+
 </html>
