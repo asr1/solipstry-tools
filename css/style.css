@@ -16,7 +16,7 @@
     top: 110px;
     left: 0px;
     width: 250px;
-    height: 100%;
+    height: calc(100% - 110px);;
 }
 .filter {
     color: #000;
@@ -48,6 +48,17 @@
 .table-striped>tbody>tr>th {
     text-align: right;
     padding-right: 8px!important;
+}
+#icon{
+  border: 1px #106c31 solid;
+  height: 260px;
+  padding: 0px!important;
+}
+.no-pad{
+  padding: 0px!important;
+}
+#statsTable{
+  padding: 0px!important;
 }
 @font-face {
     font-family: ingelby;
