@@ -35,12 +35,12 @@
     margin-top: 125px;
 }
 .table-striped>tbody>tr:nth-child(2n+1)>td, .table-striped>tbody>tr:nth-child(2n+1)>th {
-    background-color: #106c31;
+    background-color: #208C41;
     color: #fff;
     padding: 4px;
 }
 .table-striped>tbody>tr:nth-child(2n)>td, .table-striped>tbody>tr:nth-child(2n)>th {
-    background-color: #208C41;
+    background-color: #60af61;
     color: #fff;
     padding: 4px;
 }
@@ -52,6 +52,7 @@
 #icon{
   border: 1px #106c31 solid;
   height: 260px;
+  margin: 0px;
   padding: 0px!important;
 }
 .no-pad{
