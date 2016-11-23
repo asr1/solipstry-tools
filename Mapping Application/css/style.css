@@ -1,0 +1,55 @@
+#banner {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 110px;
+    width: 100%;
+    background-color: #f4ca7c;
+    color: #fff;
+    box-shadow: 0px 0px 30px #777777;
+    font-family: ingelby;
+}
+#map { 
+	height: 100%; 
+	width: 100%; 
+}
+#sidebar {
+    position: absolute;
+    font-family: ingelby;
+    background-color: #f9d590;
+    top: 110px;
+    left: 0px;
+    width: 250px;
+    height: calc(100% - 110px);;
+}
+.filter {
+    color: #000;
+}
+.filterCheckBox {
+    margin-top: 0px!important;
+    margin-bottom: 0px!important;
+}
+.filterBody {
+    padding-top: 5px!important;
+    padding-bottom: 5px!important;
+}
+#content {
+    font-family: ingelby;
+    margin-left: 260px;
+    margin-top: 125px;
+}
+#icon{
+  border: 1px #106c31 solid;
+  height: 260px;
+  padding: 0px!important;
+}
+.no-pad{
+  padding: 0px!important;
+}
+#statsTable{
+  padding: 0px!important;
+}
+@font-face {
+    font-family: ingelby;
+    src: url('../fonts/Ingleby_regular.ttf');
+}
