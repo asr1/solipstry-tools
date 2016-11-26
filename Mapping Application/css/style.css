@@ -10,7 +10,7 @@
     font-family: ingelby;
 }
 #map { 
-	height: 400px; 
+	height: 600px; 
 	width: 100%; 
 }
 #sidebar {
@@ -52,4 +52,76 @@
 @font-face {
     font-family: ingelby;
     src: url('../fonts/Ingleby_regular.ttf');
+}
+
+#enterInfo{
+  z-index: 21;
+  width:100%;
+  height:100%;
+  opacity:.95;
+  top:0;
+  left:0;
+  display:none;
+  position:fixed;
+  background-color:#333333;
+  overflow:auto
+}
+
+div#popupEnterInfo {
+border: 3px solid #cc5050;
+position:absolute;
+padding: 15px;
+left:45%;
+top:17%;
+width:550px;
+background: #fff;
+margin-left:-202px;
+}
+
+#editInfo{
+  z-index: 21;
+  width:100%;
+  height:100%;
+  opacity:.95;
+  top:0;
+  left:0;
+  display:none;
+  position:fixed;
+  background-color:#333333;
+  overflow:auto
+}
+
+div#popupEditInfo {
+border: 3px solid #cc5050;
+position:absolute;
+padding: 15px;
+left:45%;
+top:17%;
+width:550px;
+background: #fff;
+margin-left:-202px;
+}
+
+#changeInfo{
+  z-index: 21;
+  width:100%;
+  height:100%;
+  opacity:.95;
+  top:0;
+  left:0;
+  display:none;
+  position:fixed;
+  background-color:#333333;
+  overflow:auto
+}
+
+div#popupChangeInfo {
+border: 3px solid #cc5050;
+position:absolute;
+padding: 15px;
+left:45%;
+top:17%;
+width:550px;
+background: #fff;
+margin-left:-202px;
 }
