@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Solipstry: Mapping Tool</title>
+    <!--Stylesheet Import -->
+    <link rel="stylesheet" href="css\style.css" />
+    <!-- Bootstrap Stylesheet Import -->
+    <link rel="stylesheet" href="js\bootstrap-3.3.7-dist\css\bootstrap.css" />
+
+    <!-- Javascript -->
+    <script src="js\jquery-3.1.1.min.js"></script>
+	<script src="js\json2.js"></script>
+    <script src="js\bootstrap-3.3.7-dist\js\bootstrap.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRxGjbl6e_OFWmV_AgsIptqFFVxYaFLIY"></script>
+	<script src="js\mappingApp.js"></script>
+	
+	
+</head>
+
+<body>
+
+    <!-- Banner -->
+    <div id="banner" class="container-fluid navbar navbar-default">
+        <div class="row">
+            <div class="col-xs-12 col-sm-4">
+                <h1>Solipstry Mapping Tool</h1>
+            </div>
+        </div>
+    </div>
+	
+	<!-- Sidebar -->
+    <div id="sidebar">
+        <br>
+        <div class="panel-group" style="padding-left: 5px;padding-right: 5px; margin-bottom: 3px;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+						<div>
+							<label>
+								<input id="loadImage" type="button" class="btn btn-default" value="Load Image">
+								<input id="saveData" type="button" class="btn btn-default" value="Save Data">
+								<input id="loadData" type="button" class="btn btn-default" value="Load Data">
+								<input id="selectImage" type="file" name="selectImage" style="display: none;" />
+								<input id="selectData" type="file" name="selectData" style="display: none;" />
+							</label>
+						</div>
+					</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+    <!-- Content -->
+    <div class="container-fluid" id="content">
+		<div class="col-sm-12">
+			<div id="map"></div>
+		</div>
+    </div>
+
+	<!-- Change Landmarks-->
+	<div id="enterInfo" >
+		<div id="popupEnterInfo">
+			<h2>Enter LandMark Information</h2>
+			<div class="form-group">
+				<label for="enterName">Landmark Name:</label>
+				<input class="form-control" id="enterName" name="enterName" placeholder="Ex. Mount Doom" type="text">
+				<label for="enterType">Landmark Type:</label>
+				<input class="form-control" id="enterType" name="enterType" placeholder="Ex. Volcano" type="text">
+				<label for="enterLandInfo">Landmark Info:</label>
+				<input class="form-control" id="enterLandInfo" name="enterLandInfo" placeholder="Ex. A large volcano in Mordor" type="text">
+				</br>
+				<div class=row>
+					<div class="col-xs-1"></div>
+					<div class="col-xs-8">
+						<button id="submitInfo" class="btn btn-primary">Submit Info</button>
+					</div>
+					<div class="col-xs-2">
+						<button id="close" class="btn btn-danger" onclick="enterInfo_hide()">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="editInfo">
+		<div id="popupEditInfo">
+			<h2>Landmark Screen</h2>
+			<div class="form-group">
+				<div class=row>
+					<div class="col-xs-3">
+						<button id="viewLandmark" class="btn btn-primary">view Landmark</button>
+					</div>
+					<div class="col-xs-3">
+						<button id="editLandmark" class="btn btn-primary">Edit Landmark</button>
+					</div>
+					<div class="col-xs-3">
+						<button id="deleteLandmark" class="btn btn-primary">Delete Landmark</button>
+					</div>
+					<div class="col-xs-3">
+						<button id="close" class="btn btn-danger" onclick="editInfo_hide()">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="changeInfo">
+		<div id="popupChangeInfo">
+			<h2>Edit a Landmark's Information</h2>
+			<div class="form-group">
+				<label for="editName">Landmark Name:</label>
+				<input class="form-control" id="editName" name="editName" placeholder="Ex. Mount Doom" type="text">
+				<label for="editType">Landmark Type:</label>
+				<input class="form-control" id="editType" name="editType" placeholder="Ex. Volcano" type="text">
+				<label for="editLandInfo">Landmark Info:</label>
+				<input class="form-control" id="editLandInfo" name="editLandInfo" placeholder="Ex. A large volcano in Mordor" type="text">
+				</br>
+				<div class=row>
+					<div class="col-xs-1"></div>
+					<div class="col-xs-8">
+						<button id="submitChangeInfo" class="btn btn-primary">Submit Info</button>
+					</div>
+					<div class="col-xs-2">
+						<button id="close" class="btn btn-danger" onclick="changeInfo_hide()">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</body>
+
+</html>

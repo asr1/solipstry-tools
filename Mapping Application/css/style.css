@@ -1,0 +1,127 @@
+#banner {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 110px;
+    width: 100%;
+    background-color: #f4ca7c;
+    color: #fff;
+    box-shadow: 0px 0px 30px #777777;
+    font-family: ingelby;
+}
+#map { 
+	height: 600px; 
+	width: 100%; 
+}
+#sidebar {
+    position: absolute;
+    font-family: ingelby;
+    background-color: #f9d590;
+    top: 110px;
+    left: 0px;
+    width: 250px;
+    height: calc(100% - 110px);;
+}
+.filter {
+    color: #000;
+}
+.filterCheckBox {
+    margin-top: 0px!important;
+    margin-bottom: 0px!important;
+}
+.filterBody {
+    padding-top: 5px!important;
+    padding-bottom: 5px!important;
+}
+#content {
+    font-family: ingelby;
+    margin-left: 260px;
+    margin-top: 125px;
+}
+#icon{
+  border: 1px #106c31 solid;
+  height: 260px;
+  padding: 0px!important;
+}
+.no-pad{
+  padding: 0px!important;
+}
+#statsTable{
+  padding: 0px!important;
+}
+@font-face {
+    font-family: ingelby;
+    src: url('../fonts/Ingleby_regular.ttf');
+}
+
+#enterInfo{
+  z-index: 21;
+  width:100%;
+  height:100%;
+  opacity:.95;
+  top:0;
+  left:0;
+  display:none;
+  position:fixed;
+  background-color:#333333;
+  overflow:auto
+}
+
+div#popupEnterInfo {
+border: 3px solid #cc5050;
+position:absolute;
+padding: 15px;
+left:45%;
+top:17%;
+width:550px;
+background: #fff;
+margin-left:-202px;
+}
+
+#editInfo{
+  z-index: 21;
+  width:100%;
+  height:100%;
+  opacity:.95;
+  top:0;
+  left:0;
+  display:none;
+  position:fixed;
+  background-color:#333333;
+  overflow:auto
+}
+
+div#popupEditInfo {
+border: 3px solid #cc5050;
+position:absolute;
+padding: 15px;
+left:45%;
+top:17%;
+width:550px;
+background: #fff;
+margin-left:-202px;
+}
+
+#changeInfo{
+  z-index: 21;
+  width:100%;
+  height:100%;
+  opacity:.95;
+  top:0;
+  left:0;
+  display:none;
+  position:fixed;
+  background-color:#333333;
+  overflow:auto
+}
+
+div#popupChangeInfo {
+border: 3px solid #cc5050;
+position:absolute;
+padding: 15px;
+left:45%;
+top:17%;
+width:550px;
+background: #fff;
+margin-left:-202px;
+}
