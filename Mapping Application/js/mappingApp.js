@@ -27,6 +27,28 @@ $(document).ready(function(){
 	
 	var landmarks = [];
 	var markers = [];
+	
+	var icons = {
+		none: '',
+		castle : 'Castle',
+		mountain : 'Mountain',
+		cavern : 'Cavern',
+		farmland : 'Farmland',
+		forest : 'Forest',
+		river : 'River',
+		ruin : 'Ruin',
+		sea : 'Sea',
+		town : 'Town'
+	};
+	var select = document.getElementById("enterLandIcon");
+	for(index in icons) {
+		select.options[select.options.length] = new Option(icons[index], index);
+	}
+	var select2 = document.getElementById("editLandIcon");
+	for(index in icons) {
+		select2.options[select2.options.length] = new Option(icons[index], index);
+	}
+	
 	var index = 0;
 	var activeIndex = -1;
 	
@@ -118,7 +140,7 @@ $(document).ready(function(){
 						editInfo_show();
 					}
 				});
-				temp = new Landmark(index, marker.position, "", "", "");
+				temp = new Landmark(index, marker.position, "", "", "", "");
 				markers.push(marker);
 				landmarks.push(temp);
 				index++;
@@ -235,6 +257,7 @@ $(document).ready(function(){
 		$("#editName").val(landmarks[activeIndex].landmarkName);
 		$("#editType").val(landmarks[activeIndex].landmarkType);
 		$("#editLandInfo").val(landmarks[activeIndex].landmarkInfo);
+		$("#editLandIcon").val(landmarks[activeIndex].landmarkIcon);
         changeInfo_show();
 	});
 	
@@ -297,6 +320,9 @@ $(document).ready(function(){
 				position: landmarks[j].position, 
 				map: map
 			});
+			if(landmarks[j].landmarkIcon != ""){
+				marker.setIcon("icons/" + landmarks[j].landmarkIcon + ".png");
+			}
 			marker.addListener('click', function() {
 				var i = 0;
 				while(i<landmarks.length){
@@ -321,12 +347,13 @@ $(document).ready(function(){
 
 	////////////////////////LANDMARK FUNCTIONS////////////////////////
 	
-	Landmark = function (ID, position, landmarkName, landmarkType, landmarkInfo){
+	Landmark = function (ID, position, landmarkName, landmarkType, landmarkInfo, landmarkIcon){
 		this.ID = ID;
 		this.position = position;
 		this.landmarkName = landmarkName;
 		this.landmarkType = landmarkType;
 		this.landmarkInfo = landmarkInfo;
+		this.landmarkIcon = landmarkIcon;
 	}
 	
 	Landmark.prototype.constructor = Landmark;
@@ -337,12 +364,18 @@ $(document).ready(function(){
 		var landName = $("#enterName").val();
 		var landType = $("#enterType").val();
 		var landInfo = $("#enterLandInfo").val();
+		var landIcon = $("#enterLandIcon").val();
+		if(landIcon != ""){
+			setIcon(landIcon);
+		}
 		landmarks[activeIndex].landmarkName = landName;
 		landmarks[activeIndex].landmarkType = landType;
 		landmarks[activeIndex].landmarkInfo = landInfo;
+		landmarks[activeIndex].landmarkIcon = landIcon;
 		$("#enterName").val("");
 		$("#enterType").val("");
 		$("#enterLandInfo").val("");
+		$("#enterLandIcon").val("");
 		activeIndex = -1;
 		console.log(landmarks);
 		enterInfo_hide();
@@ -352,12 +385,22 @@ $(document).ready(function(){
 		var landName = $("#editName").val();
 		var landType = $("#editType").val();
 		var landInfo = $("#editLandInfo").val();
+		var landIcon = $("#editLandIcon").val();
+		if(landIcon != ""){
+			setIcon(landIcon);
+		}
 		landmarks[activeIndex].landmarkName = landName;
 		landmarks[activeIndex].landmarkType = landType;
 		landmarks[activeIndex].landmarkInfo = landInfo;
+		landmarks[activeIndex].landmarkIcon = landIcon;
 		activeIndex = -1;
 		console.log(landmarks);
 		changeInfo_hide();
 	});
+	
+	function setIcon(name){
+		var src = "icons/" + name + ".png";
+		markers[activeIndex].setIcon(src);
+	}
 	
 });
