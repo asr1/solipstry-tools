@@ -26,6 +26,7 @@ function changeInfo_hide(){
 $(document).ready(function(){
 	
 	var landmarks = [];
+	var markers = [];
 	var index = 0;
 	var activeIndex = -1;
 	
@@ -35,17 +36,17 @@ $(document).ready(function(){
 	var backgroundImage = 'images/background.png';
 	mapImage = new Image();
 	var srcImage = 'images/map1.jpg';
+	
+	var map = new google.maps.Map(document.getElementById('map'), {
+		zoom: 5,
+		center: {lat: 0, lng: 0},
+		mapTypeId: 'satellite'
+	});
+	map.setOptions({ minZoom: 5, maxZoom: 15 });
 
 	////////////////////////INIT FUNCTION////////////////////////////
 	
 	function initMap() {
-		
-		var map = new google.maps.Map(document.getElementById('map'), {
-			zoom: 5,
-			center: {lat: 0, lng: 0},
-			mapTypeId: 'satellite'
-		});
-		map.setOptions({ minZoom: 5, maxZoom: 15 });
 		
 		var imgWidth, imgHeight, aspectRatio, xLeft, xRight;
 		
@@ -104,7 +105,7 @@ $(document).ready(function(){
 				marker.addListener('click', function() {
 					var i = 0;
 					while(i<landmarks.length){
-						if(landmarks[i].marker === marker){
+						if(markers[i] === marker){
 							activeIndex = landmarks[i].ID;
 						}
 						i++;
@@ -117,7 +118,8 @@ $(document).ready(function(){
 						editInfo_show();
 					}
 				});
-				temp = new Landmark(index, marker, "", "", "");
+				temp = new Landmark(index, marker.position, "", "", "");
+				markers.push(marker);
 				landmarks.push(temp);
 				index++;
 			});
@@ -224,7 +226,7 @@ $(document).ready(function(){
 		var infowindow = new google.maps.InfoWindow({
           content: contentString
         });
-		infowindow.open(map, landmarks[activeIndex].marker);
+		infowindow.open(map, markers[activeIndex]);
 		activeIndex = -1;
 		editInfo_hide();
 	});
@@ -236,14 +238,38 @@ $(document).ready(function(){
         changeInfo_show();
 	});
 	
-	$("#loadImage").click(function(){
-        load_Image();
+	$("#deleteLandmark").click(function(){
+		editInfo_hide();
+		markers[activeIndex].setVisible(false);
+        changeInfo_show();
 	});
 	
-	function load_Image(){
-		$('#selectImage').trigger('click');
+	$("#loadImage").click(function(){
+        $('#selectImage').trigger('click');
 		var x = $('#selectImage').value;
-	}
+	});
+	
+	$("#loadData").click(function(){
+        $('#selectData').trigger('click');
+		var x = $('#selectData').value;
+	});
+	
+	$("#saveData").click(function(){
+        var data = JSON.stringify(landmarks);
+		var fileName = "markerData.mdata";
+		var a = document.createElement("a");
+		document.body.appendChild(a);
+		a.style = "display: none";
+		console.log( data);
+		console.log( fileName);      
+		 var json = JSON.stringify(data),
+			blob = new Blob([json], {type: "octet/stream"}),
+			url = window.URL.createObjectURL(blob);
+		a.href = url;
+		a.download = fileName;
+		a.click();
+		window.URL.revokeObjectURL(url);
+	});
 	
 	$('#selectImage').change(function () {
 		console.log(this.files[0].name);
@@ -251,12 +277,53 @@ $(document).ready(function(){
 		srcImage = 'images/' + name;
 		initMap();
 	});
+	
+	$('#selectData').change(function () {
+		file = this.files[0];
+		fr = new FileReader();
+		fr.onload = createMarkers;
+		fr.readAsText(file);
+	});
+	
+	function createMarkers(e) {
+		lines = e.target.result;
+		var newArr = JSON.parse(JSON.parse(lines));
+		console.log( newArr);
+		landmarks = newArr;
+		markers = [];
+		var j = 0;
+		while(j < landmarks.length){
+			var marker = new google.maps.Marker({
+				position: landmarks[j].position, 
+				map: map
+			});
+			marker.addListener('click', function() {
+				var i = 0;
+				while(i<landmarks.length){
+					if(markers[i] === marker){
+					activeIndex = landmarks[i].ID;
+					}
+					i++;
+				}
+				console.log(activeIndex);
+				if(landmarks[activeIndex].landmarkName == ""){
+					enterInfo_show();
+				}
+				else{
+					editInfo_show();
+				}
+			});
+			markers.push(marker);
+			j++;
+		}
+		
+	}
 
 	////////////////////////LANDMARK FUNCTIONS////////////////////////
 	
-	Landmark = function (ID, marker, landmarkName, landmarkType, landmarkInfo){
+	Landmark = function (ID, position, landmarkName, landmarkType, landmarkInfo){
 		this.ID = ID;
-		this.marker = marker;
+		this.position = position;
 		this.landmarkName = landmarkName;
 		this.landmarkType = landmarkType;
 		this.landmarkInfo = landmarkInfo;

@@ -12,6 +12,7 @@
 
     <!-- Javascript -->
     <script src="js\jquery-3.1.1.min.js"></script>
+	<script src="js\json2.js"></script>
     <script src="js\bootstrap-3.3.7-dist\js\bootstrap.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRxGjbl6e_OFWmV_AgsIptqFFVxYaFLIY"></script>
 	<script src="js\mappingApp.js"></script>
@@ -40,7 +41,10 @@
 						<div>
 							<label>
 								<input id="loadImage" type="button" class="btn btn-default" value="Load Image">
+								<input id="saveData" type="button" class="btn btn-default" value="Save Data">
+								<input id="loadData" type="button" class="btn btn-default" value="Load Data">
 								<input id="selectImage" type="file" name="selectImage" style="display: none;" />
+								<input id="selectData" type="file" name="selectData" style="display: none;" />
 							</label>
 						</div>
 					</h4>
@@ -57,7 +61,7 @@
     </div>
 
 	<!-- Change Landmarks-->
-	<div id="enterInfo">
+	<div id="enterInfo" >
 		<div id="popupEnterInfo">
 			<h2>Enter LandMark Information</h2>
 			<div class="form-group">
