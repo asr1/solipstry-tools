@@ -46,7 +46,7 @@
 }
 .table-striped>tbody>tr>td {}
 .table-striped>tbody>tr>th {
-    text-align: right;
+    text-align: center;
     padding-right: 8px!important;
 }
 #icon{
