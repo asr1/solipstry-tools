@@ -16,12 +16,12 @@
 
 
     <!-- Javascript -->
+    <script src="http://localhost:4000/socket.io/socket.io.js"></script>
     <!--  <script src="js\jquery-3.1.1.min.js"></script>-->
     <script src="js\bootstrap-3.3.7-dist\js\bootstrap.js"></script>
     <script src="js/magicsuggest/magicsuggest-min.js"></script>
     <script src="js\roguesgallery.js"></script>
     <!-- Socket Import, for later -->
-    <!--<script src="http://10.26.65.192:5000/socket.io/socket.io.js"></script>0-->
 
 </head>
 
@@ -29,17 +29,15 @@
     <!-- Banner -->
     <div id="banner" class="container-fluid navbar navbar-default">
         <div class="row">
-          <form action="query.php" method="post" class="form-group">
             <div class="col-xs-4">
                 <h1>Rogue's Gallery</h1>
             </div>
             <div class="col-xs-7" style="padding-right: 0px; margin-top: 22px;">
-                <input type="text" class="form-control" id="searchBar" />
+                <input type="text" name='search' class="form-control" id="searchBar" />
             </div>
             <div class="col-xs-1" style="padding-left: 0px; margin-top: 22px;">
-                <button id="btnSearch" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                <button id="btnSearch" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
             </div>
-          </form>
         </div>
     </div>
     <div id="sidebar">
@@ -49,7 +47,8 @@
                 <div class="panel-heading">
                     <h4 class="panel-title">
               <div class="checkbox filterCheckBox">
-                <label><input type="checkbox" value=""><a data-toggle="collapse" class="filter" href="#collapseMons">Monsters</a></label>
+                <label><input id="chkMonster" type="checkbox" value=""><a data-toggle="collapse" class="filter" href="#collapseMons">Monsters</a></label>
+                <button id="btnAddMonster" class="btn-default pull-right">Add</button>
               </div>
             </h4>
                 </div>
@@ -62,6 +61,7 @@
                     Homebrew
                   </a>
                             </label>
+                            <button id="btnAdd" class="btn-default pull-right">Add</button>
                         </div>
                     </div>
                     <div class="panel-footer"></div>
@@ -74,18 +74,19 @@
                 <div class="panel-heading">
                     <h4 class="panel-title">
               <div class="checkbox filterCheckBox">
-                <label><input type="checkbox" value=""><a data-toggle="collapse" class="filter" href="#collapseMaps">
-                  Maps
+                <label><input id="chkNPC" type="checkbox" value=""><a data-toggle="collapse" class="filter" href="#collapseNPCs">
+                  Characters
                 </a></label>
+                <button id="btnAddNPCs" class="btn-default pull-right">Add</button>
               </div>
             </h4>
                 </div>
-                <div id="collapseMaps" class="panel-collapse collapse">
+                <div id="collapseNPCs" class="panel-collapse collapse">
                     <div class="panel-body filterBody">
                         <div class="checkbox filterCheckBox">
                             <label>
                                 <input type="checkbox" value="">
-                                <a data-toggle="collapse" class="filter" href="#collapseMaps">
+                                <a data-toggle="collapse" class="filter" href="#collapseNPCs">
                     Homebrew
                   </a>
                             </label>
@@ -101,9 +102,10 @@
                 <div class="panel-heading">
                     <h4 class="panel-title">
               <div class="checkbox filterCheckBox">
-                <label><input type="checkbox" value=""><a data-toggle="collapse" class="filter" href="#collapseSpells">
-                  Spells
+                <label><input id="chkSpells" type="checkbox" value=""><a data-toggle="collapse" class="filter" href="#collapseSpells">
+                  Abilities
                 </a></label>
+                <button id="btnAddSpells" class="btn-default pull-right">Add</button>
               </div>
             </h4>
                 </div>
@@ -128,18 +130,19 @@
                 <div class="panel-heading">
                     <h4 class="panel-title">
               <div class="checkbox filterCheckBox">
-                <label><input type="checkbox" value=""><a data-toggle="collapse" class="filter" href="#collapseCamp">
-                  Campaigns
+                <label><input id="chkTalents" type="checkbox" value=""><a data-toggle="collapse" class="filter" href="#collapseTalents">
+                  Talent
                 </a></label>
+                <button id="btnAddTalent" class="btn-default pull-right">Add</button>
               </div>
             </h4>
                 </div>
-                <div id="collapseCamp" class="panel-collapse collapse">
+                <div id="collapseTalents" class="panel-collapse collapse">
                     <div class="panel-body filterBody">
                         <div class="checkbox filterCheckBox">
                             <label>
                                 <input type="checkbox" value="">
-                                <a data-toggle="collapse" class="filter" href="#collapseCamp">
+                                <a data-toggle="collapse" class="filter" href="#collapseTalents">
                     Homebrew
                   </a>
                             </label>
@@ -155,9 +158,9 @@
                 <div class="panel-heading">
                     <h4 class="panel-title">
               <div class="checkbox filterCheckBox">
-                <label><input type="checkbox" value=""><a data-toggle="collapse" class="filter" href="#collapseEquip">
-                  Equipment
-                </a></label>
+                  <label><input id="chkEquipment" type="checkbox" value="">
+                    <a data-toggle="collapse" class="filter" href="#collapseEquip">Equipment</a></label>
+                    <button  id="btnAddEquipment" class="btn-default pull-right">Add</button>
               </div>
             </h4>
                 </div>
@@ -176,12 +179,14 @@
                 </div>
             </div>
         </div>
+
+
     </div>
     <!-- End Banner -->
     <!-- Content -->
     <div class="container-fluid" id="content">
       <div class="row no-pad">
-        <h2>Heeghog</h2>
+        <h2 id='name'>Heeghog</h2>
       </div>
       <div class="col-md-3 no-pad">
         <img class="img-responsive" src="images\baby-hedgehog.jpg" id="icon"/>
@@ -190,39 +195,39 @@
             <table class="table table-striped">
                 <tr>
                     <th>Hit Points:</th>
-                    <td>20</td>
+                    <td id='hp'>20</td>
                 </tr>
                 <tr>
                     <th>Armor Class:</th>
-                    <td>16</td>
+                    <td id='hp'>16</td>
                 </tr>
                 <tr>
                     <th>Reflex:</th>
-                    <td>12</td>
+                    <td id='hp'>12</td>
                 </tr>
                 <tr>
                     <th>Fortitude:</th>
-                    <td>12</td>
+                    <td id='hp'>12</td>
                 </tr>
                 <tr>
                     <th>Will:</th>
-                    <td>12</td>
+                    <td id='hp'>12</td>
                 </tr>
                 <tr>
                     <th>Movement:</th>
-                    <td>6</td>
+                    <td id='hp'>6</td>
                 </tr>
                 <tr>
                     <th>Initiative:</th>
-                    <td>+2</td>
+                    <td id='hp'>+2</td>
                 </tr>
                 <tr>
                     <th>Attack:</th>
-                    <td>+4</td>
+                    <td id='hp'>+4</td>
                 </tr>
                 <tr>
                     <th>Damage:</th>
-                    <td>1d6 * 7</td>
+                    <td id='hp'>1d6 * 7</td>
                 </tr>
             </table>
 
@@ -268,5 +273,5 @@
         </div>
 
     </div>
-
+    <div id='query' style='display = none;'></div>
 </html>

@@ -1,4 +1,10 @@
 <?php
+
+$val = "";
+if(isset($_GET['search'])){
+  $val = $_GET['search'];
+}
+
 echo "
 <!doctype html>
 <html>
@@ -18,25 +24,26 @@ echo "
 
 
     <!-- Javascript -->
+    <script src='http://localhost:4000/socket.io/socket.io.js'></script>
     <!--  <script src='js\jquery-3.1.1.min.js'></script>-->
-    <script src='js\bootstrap-3.3.7-dist\js\bootstrap.js'></script>
+    <script src='js/bootstrap-3.3.7-dist/js/bootstrap.js'></script>
     <script src='js/magicsuggest/magicsuggest-min.js'></script>
-    <script src='js\roguesgallery.js'></script>
-    <!-- Socket Import, for later -->
-    <!--<script src='http://10.26.65.192:5000/socket.io/socket.io.js'></script>0-->
+    <script src='js/roguesgallery.js'></script>
+
 
 </head>
 
 <body>
     <!-- Banner -->
+    </div>
     <div id='banner' class='container-fluid navbar navbar-default'>
         <div class='row'>
-          <form action='query.html' method='post' class='form-group'>
+          <form action='query.php' method='GET' class='form-group'>
             <div class='col-xs-4'>
                 <h1>Rogue's Gallery</h1>
             </div>
             <div class='col-xs-7' style='padding-right: 0px; margin-top: 22px;'>
-                <input type='text' class='form-control' id='searchBar' />
+                <input type='text' name='search' class='form-control' id='searchBar' />
             </div>
             <div class='col-xs-1' style='padding-left: 0px; margin-top: 22px;'>
                 <button id='btnSearch' type='submit' class='btn btn-default'><span class='glyphicon glyphicon-search'></span></button>
@@ -52,6 +59,7 @@ echo "
                     <h4 class='panel-title'>
               <div class='checkbox filterCheckBox'>
                 <label><input type='checkbox' value=''><a data-toggle='collapse' class='filter' href='#collapseMons'>Monsters</a></label>
+                <button id='btnAddMonster' class='btn-default pull-right'>Add</button>
               </div>
             </h4>
                 </div>
@@ -64,6 +72,7 @@ echo "
                     Homebrew
                   </a>
                             </label>
+                            <button id='btnAdd' class='btn-default pull-right'>Add</button>
                         </div>
                     </div>
                     <div class='panel-footer'></div>
@@ -79,6 +88,7 @@ echo "
                 <label><input type='checkbox' value=''><a data-toggle='collapse' class='filter' href='#collapseMaps'>
                   Maps
                 </a></label>
+                <button id='btnAddMaps' class='btn-default pull-right'>Add</button>
               </div>
             </h4>
                 </div>
@@ -106,6 +116,7 @@ echo "
                 <label><input type='checkbox' value=''><a data-toggle='collapse' class='filter' href='#collapseSpells'>
                   Spells
                 </a></label>
+                <button id='btnAddSpells' class='btn-default pull-right'>Add</button>
               </div>
             </h4>
                 </div>
@@ -133,6 +144,7 @@ echo "
                 <label><input type='checkbox' value=''><a data-toggle='collapse' class='filter' href='#collapseCamp'>
                   Campaigns
                 </a></label>
+                <button id='btnAddCampaign' class='btn-default pull-right'>Add</button>
               </div>
             </h4>
                 </div>
@@ -157,9 +169,9 @@ echo "
                 <div class='panel-heading'>
                     <h4 class='panel-title'>
               <div class='checkbox filterCheckBox'>
-                <label><input type='checkbox' value=''><a data-toggle='collapse' class='filter' href='#collapseEquip'>
-                  Equipment
-                </a></label>
+                  <label><input type='checkbox' value=''>
+                    <a data-toggle='collapse' class='filter' href='#collapseEquip'>Equipment</a></label>
+                    <button id='btnAddEquipment' class='btn-default pull-right'>Add</button>
               </div>
             </h4>
                 </div>
@@ -178,6 +190,8 @@ echo "
                 </div>
             </div>
         </div>
+
+
     </div>
     <!-- End Banner -->
     <!-- Content -->
@@ -269,8 +283,7 @@ echo "
               victim, allowing little time for escape.
         </div>
 
-    </div>
-
-</html>
-"
+    </div><div id='query' style='display = none;'>";
+echo implode(" ",$val);
+echo "</div></html>";
 ?>
