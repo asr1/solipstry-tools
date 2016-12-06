@@ -4,23 +4,23 @@
     left: 0px;
     height: 110px;
     width: 100%;
-    background-color: #f4ca7c;
+    background-color: #003e00;
     color: #fff;
     box-shadow: 0px 0px 30px #777777;
     font-family: ingelby;
 }
-#map { 
-	height: 600px; 
-	width: 100%; 
-}
 #sidebar {
     position: absolute;
     font-family: ingelby;
-    background-color: #f9d590;
+    background-color: #004d00;
     top: 110px;
     left: 0px;
     width: 250px;
     height: calc(100% - 110px);;
+}
+html,
+body {
+  height: 100%;
 }
 .filter {
     color: #000;
@@ -35,8 +35,10 @@
 }
 #content {
     font-family: ingelby;
-    margin-left: 260px;
-    margin-top: 125px;
+    margin-left: 250px;
+    margin-top: 110px;
+	height: 100%;
+	width: 100%;
 }
 #icon{
   border: 1px #106c31 solid;

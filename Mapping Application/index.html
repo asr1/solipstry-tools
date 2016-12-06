@@ -35,29 +35,59 @@
     <div id="sidebar">
         <br>
         <div class="panel-group" style="padding-left: 5px;padding-right: 5px; margin-bottom: 3px;">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-						<div>
-							<label>
-								<input id="loadImage" type="button" class="btn btn-default" value="Load Image">
-								<input id="saveData" type="button" class="btn btn-default" value="Save Data">
-								<input id="loadData" type="button" class="btn btn-default" value="Load Data">
-								<input id="selectImage" type="file" name="selectImage" style="display: none;" />
-								<input id="selectData" type="file" name="selectData" style="display: none;" />
-							</label>
-						</div>
-					</h4>
-                </div>
-            </div>
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<div>
+						<label>
+							<input id="loadImage" type="button" class="btn btn-default" value="Load Image">
+							<input id="selectImage" type="file" name="selectImage" style="display: none;" />
+						</label>
+					</div>
+				</h4>
+			</div>
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<div>
+						<label>
+							<input id="saveData" type="button" class="btn btn-default" value="Save Data">
+						</label>
+					</div>
+				</h4>
+			</div>
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<div>
+						<label>
+							<input id="loadData" type="button" class="btn btn-default" value="Load Data">
+							<input id="selectData" type="file" name="selectData" style="display: none;" />
+						</label>
+					</div>
+				</h4>
+			</div>
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<div>
+						<label>
+							<input id="hideMarkers" type="button" class="btn btn-default" value="Hide Markers">
+						</label>
+					</div>
+				</h4>
+			</div>
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<div>
+						<label>
+							<input id="showMarkers" type="button" class="btn btn-default" value="Show Markers">
+						</label>
+					</div>
+				</h4>
+			</div>
         </div>
     </div>
 	
     <!-- Content -->
-    <div class="container-fluid" id="content">
-		<div class="col-sm-12">
+    <div class="container-fluid no-pad" id="content">
 			<div id="map"></div>
-		</div>
     </div>
 
 	<!-- Change Landmarks-->
@@ -87,6 +117,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<div id="editInfo">
 		<div id="popupEditInfo">
 			<h2>Landmark Screen</h2>
@@ -108,6 +139,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<div id="changeInfo">
 		<div id="popupChangeInfo">
 			<h2>Edit a Landmark's Information</h2>
