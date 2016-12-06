@@ -1,0 +1,10 @@
+server/
+d/
+Data/node_modules/
+App/
+Data/npm.cmd
+Data/npm
+Other/
+Data/settings/NodeJSPortableSettings.ini
+Data/.DS_Store
+Data/settings/NodeJSPortableSettings.ini.rej
