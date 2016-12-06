@@ -138,7 +138,7 @@ $(document).ready(function(){
 				marker.addListener('click', function() {
 					var i = 0;
 					while(i<landmarks.length){
-						if(markers[i] === marker){
+						if(markers[i] === this){
 							activeIndex = landmarks[i].ID;
 						}
 						i++;
@@ -154,6 +154,8 @@ $(document).ready(function(){
 				temp = new Landmark(index, marker.position, "", "", "", "");
 				markers.push(marker);
 				landmarks.push(temp);
+				console.log(markers)
+				console.log(landmarks);
 				index++;
 			});
 
@@ -336,14 +338,15 @@ $(document).ready(function(){
 			markers[i].setMap(map);
 		}
 	}
-
 	
 	function createMarkers(e) {
 		lines = e.target.result;
 		var newArr = JSON.parse(JSON.parse(lines));
 		console.log( newArr);
 		landmarks = newArr;
+		setMapOnAll(null);
 		markers = [];
+		index = 0;
 		var j = 0;
 		while(j < landmarks.length){
 			var marker = new google.maps.Marker({
@@ -353,11 +356,21 @@ $(document).ready(function(){
 			if(landmarks[j].landmarkIcon != ""){
 				marker.setIcon("icons/" + landmarks[j].landmarkIcon + ".png");
 			}
-			marker.addListener('click', function() {
+			markers.push(marker);
+			index++;
+			j++;
+		}
+		console.log(markers);
+		activeIndex = -1;
+		j = 0;
+		while(j < landmarks.length){
+			markers[j].addListener('click', function() {
 				var i = 0;
+				activeIndex = -1;
 				while(i<landmarks.length){
-					if(markers[i] === marker){
-					activeIndex = landmarks[i].ID;
+					console.log(i);
+					if(markers[i].position == this.position){
+						activeIndex = landmarks[i].ID;
 					}
 					i++;
 				}
@@ -369,10 +382,8 @@ $(document).ready(function(){
 					editInfo_show();
 				}
 			});
-			markers.push(marker);
 			j++;
 		}
-		
 	}
 
 	////////////////////////LANDMARK FUNCTIONS////////////////////////
