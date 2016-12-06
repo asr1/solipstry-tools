@@ -23,10 +23,14 @@ function changeInfo_hide(){
 	document.getElementById('changeInfo').style.display = "none";
 }
 
+
 $(document).ready(function(){
+
 	
 	var landmarks = [];
 	var markers = [];
+		$("#map").width(window.innerWidth - 265);
+		$("#map").height(window.innerHeight - 130);
 	
 	var icons = {
 		none: '',
@@ -61,17 +65,24 @@ $(document).ready(function(){
 	
 	var map = new google.maps.Map(document.getElementById('map'), {
 		zoom: 5,
+		width: window.innerWidth - 210,
+		height: window.innerHeight - 110,
 		center: {lat: 0, lng: 0},
 		mapTypeId: 'satellite'
 	});
 	map.setOptions({ minZoom: 5, maxZoom: 15 });
+	
+	google.maps.event.addDomListener(window, "resize", function() {
+		var center = map.getCenter();
+		google.maps.event.trigger(map, "resize");
+		map.setCenter(center); 
+	});
 
 	////////////////////////INIT FUNCTION////////////////////////////
 	
 	function initMap() {
 		
 		var imgWidth, imgHeight, aspectRatio, xLeft, xRight;
-		
 		//Once the image is loaded, load the image onto the map
 		mapImage.onload = function() {
 			
@@ -99,7 +110,7 @@ $(document).ready(function(){
 				new google.maps.LatLng(2, 8));
 				
 			// Listen for the dragend event
-			google.maps.event.addListener(map, 'drag', function() {
+			/*google.maps.event.addListener(map, 'drag', function() {
 			
 				if (strictBounds.contains(map.getCenter())) return;
 
@@ -117,7 +128,7 @@ $(document).ready(function(){
 					if (y < minY) y = minY;
 					if (y > maxY) y = maxY;
 					map.setCenter(new google.maps.LatLng(y, x));
-			});
+			});*/
 			
 			google.maps.event.addListener(map, 'click', function(event) {
 				var marker = new google.maps.Marker({
@@ -145,7 +156,6 @@ $(document).ready(function(){
 				landmarks.push(temp);
 				index++;
 			});
-
 
 			// The custom USGSOverlay object contains the USGS image,
 			// the bounds of the image, and a reference to the map.
@@ -264,7 +274,6 @@ $(document).ready(function(){
 	$("#deleteLandmark").click(function(){
 		editInfo_hide();
 		markers[activeIndex].setVisible(false);
-        changeInfo_show();
 	});
 	
 	$("#loadImage").click(function(){
@@ -298,6 +307,12 @@ $(document).ready(function(){
 		console.log(this.files[0].name);
 		var name = this.files[0].name;
 		srcImage = 'images/' + name;
+		map = new google.maps.Map(document.getElementById('map'), {
+			zoom: 5,
+			center: {lat: 0, lng: 0},
+			mapTypeId: 'satellite'
+		});
+		map.setOptions({ minZoom: 5, maxZoom: 15 });
 		initMap();
 	});
 	
@@ -307,6 +322,21 @@ $(document).ready(function(){
 		fr.onload = createMarkers;
 		fr.readAsText(file);
 	});
+	
+	$("#hideMarkers").click(function(){
+        setMapOnAll(null);
+	});
+	
+	$("#showMarkers").click(function(){
+        setMapOnAll(map);
+	});
+	
+	function setMapOnAll(map) {
+		for (var i = 0; i < markers.length; i++) {
+			markers[i].setMap(map);
+		}
+	}
+
 	
 	function createMarkers(e) {
 		lines = e.target.result;
