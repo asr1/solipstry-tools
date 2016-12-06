@@ -241,7 +241,7 @@ function postAbility(abilityObject) {
                 if (abilityObject.Prerequisites != undefined) {
                     for (var i in abilityObject.Prerequisites) {
                         var prereq = abilityObject.Prerequites;
-                        connection.query("INSERT INTO PREREQUISITES (ITEM_ID,ITEM_TYPE,DESCRIPTION,IS_HOMEBREW) VALUES(" + itemID + ",'ABILITIES'," + mysql.escape(abilityObject.Prerequisites[i]) + ",true);", function (err, result) {
+                        connection.query("INSERT INTO PREREQUISITES (ITEM_ID,ITEM_TYPE,DESCRIPTION,IS_HOMEBREW) VALUES(" + result.insertId + ",'ABILITIES'," + mysql.escape(abilityObject.Prerequisites[i]) + ",true);", function (err, result) {
                             if (err)
                                 console.log("postAbility insert prereq SQL ERROR: " + err);
                         });
@@ -249,7 +249,7 @@ function postAbility(abilityObject) {
                 }
                 if (abilityObject.Tags != undefined) {
                     for (var i in abilityObject.Tags) {
-                        connection.query("INSERT INTO ENTITY_TAGS (ENTITY_ID,ENTITY_TYPE,TAG) VALUES(" + itemID + ",'ABILITIES'," + mysql.escape(abilityObject.Tags[i]) + ");", function (err, result) {
+                        connection.query("INSERT INTO ENTITY_TAGS (ENTITY_ID,ENTITY_TYPE,TAG) VALUES(" + result.insertId + ",'ABILITIES'," + mysql.escape(abilityObject.Tags[i]) + ");", function (err, result) {
                             if (err)
                                 console.log("postAbility insert TAG SQL ERROR: " + err + ":" + sql);
                         });
@@ -285,7 +285,7 @@ function postAbility(abilityObject) {
             }
             if (abilityObject.Tags != undefined) {
                 for (var i in abilityObject.Tags) {
-                    connection.query("INSERT INTO ENTITY_TAGS (ENTITY_ID,ENTITY_TYPE,TAG) VALUES(" + itemID + ",'ABILITIES'," + mysql.escape(abilityObject.Tags[i]) + ");", function (err, result) {
+                    connection.query("INSERT INTO ENTITY_TAGS (ENTITY_ID,ENTITY_TYPE,TAG) VALUES(" + result.insertId + ",'ABILITIES'," + mysql.escape(abilityObject.Tags[i]) + ");", function (err, result) {
                         if (err)
                             console.log("postAbility TAG SQL ERROR: " + err + ":" + sql);
                     });
@@ -311,7 +311,7 @@ function postEquipment(equipmentObject) {
                 var itemID = result.insertId;
                 if (equipmentObject.Tags != undefined) {
                     for (var i in equipmentObject.Tags) {
-                        connection.query("INSERT INTO ENTITY_TAGS (ENTITY_ID,ENTITY_TYPE,TAG) VALUES(" + itemID + ",'EQUIPMENT'," + mysql.escape(equipmentObject.Tags[i]) + ");", function (err, result) {
+                        connection.query("INSERT INTO ENTITY_TAGS (ENTITY_ID,ENTITY_TYPE,TAG) VALUES(" + result.insertId + ",'EQUIPMENT'," + mysql.escape(equipmentObject.Tags[i]) + ");", function (err, result) {
                             if (err)
                                 console.log("postEquipment insert TAG SQL ERROR: " + err + ":" + sql);
                         });
@@ -340,7 +340,7 @@ function postMonster(monsterObject) {
             else {
                 if (monsterObject.Tags != undefined) {
                     for (var i in monsterObject.Tags) {
-                        connection.query("INSERT INTO ENTITY_TAGS (ENTITY_ID,ENTITY_TYPE,TAG) VALUES(" + itemID + ",'MONSTERS'," + mysql.escape(monsterObject.Tags[i]) + ");", function (err, result) {
+                        connection.query("INSERT INTO ENTITY_TAGS (ENTITY_ID,ENTITY_TYPE,TAG) VALUES(" + result.insertId + ",'MONSTERS'," + mysql.escape(monsterObject.Tags[i]) + ");", function (err, result) {
                             if (err)
                                 console.log("postMonster insert TAG SQL ERROR: " + err + ":" + sql);
                         });
@@ -370,7 +370,7 @@ function postNPC(NPCObject) {
                 var itemID = result.insertId;
                 if (abilityObject.Tags != undefined) {
                     for (var i in abilityObject.Tags) {
-                        connection.query("INSERT INTO ENTITY_TAGS (ENTITY_ID,ENTITY_TYPE,TAG) VALUES(" + itemID + ",'NPCS'," + mysql.escape(NPCObject.Tags[i]) + ");", function (err, result) {
+                        connection.query("INSERT INTO ENTITY_TAGS (ENTITY_ID,ENTITY_TYPE,TAG) VALUES(" + result.insertId + ",'NPCS'," + mysql.escape(NPCObject.Tags[i]) + ");", function (err, result) {
                             if (err)
                                 console.log("postNPC insert TAG SQL ERROR: " + err + ":" + sql);
                         });
@@ -401,7 +401,7 @@ function postTalent(talentObject) {
                 if (talentObject.Prerequisites != undefined) {
                     for (var i in talentObject.Prerequisites) {
                         var prereq = talentObject.Prerequites;
-                        connection.query("INSERT INTO PREREQUISITES (ITEM_ID,ITEM_TYPE,DESCRIPTION,IS_HOMEBREW) VALUES(" + itemID + ",'ABILITIES'," + mysql.escape(talentObject.Prerequisites[i]) + ",true);", function (err, result) {
+                        connection.query("INSERT INTO PREREQUISITES (ITEM_ID,ITEM_TYPE,DESCRIPTION,IS_HOMEBREW) VALUES(" + result.insertId + ",'ABILITIES'," + mysql.escape(talentObject.Prerequisites[i]) + ",true);", function (err, result) {
                             if (err)
                                 console.log("postTalent insert prereq SQL ERROR: " + err);
                         });
@@ -409,7 +409,7 @@ function postTalent(talentObject) {
                 }
                 if (talentObject.Tags != undefined) {
                     for (var i in talentObject.Tags) {
-                        connection.query("INSERT INTO ENTITY_TAGS (ENTITY_ID,ENTITY_TYPE,TAG) VALUES(" + itemID + ",'ABILITIES'," + mysql.escape(talentObject.Tags[i]) + ");", function (err, result) {
+                        connection.query("INSERT INTO ENTITY_TAGS (ENTITY_ID,ENTITY_TYPE,TAG) VALUES(" + result.insertId + ",'ABILITIES'," + mysql.escape(talentObject.Tags[i]) + ");", function (err, result) {
                             if (err)
                                 console.log("postTalent insert TAG SQL ERROR: " + err + ":" + sql);
                         });
@@ -510,6 +510,7 @@ function shallowQuery(tables, tags, callback) {
             var finishQuery = function () {
                 queriesActive--;
                 if (queriesActive == 0) {
+                    console.log("query finish!: "+[abilities, equipment, monsters, npcs, talents])
                     callback([abilities, equipment, monsters, npcs, talents]);
                 }
             }
@@ -519,6 +520,7 @@ function shallowQuery(tables, tags, callback) {
                         console.log("shallowQuery ABILITY SQL ERROR: " + err)
                     }
                     else {
+                      console.log("table query finished");
                         if (rows.length == 0) {
                             finishQuery();
                         }
@@ -542,6 +544,7 @@ function shallowQuery(tables, tags, callback) {
                         console.log("shallowQuery ABILITY SQL ERROR: " + err)
                     }
                     else {
+                      console.log("table query finished");
                         if (rows.length == 0) {
                             finishQuery();
                         }
@@ -549,7 +552,7 @@ function shallowQuery(tables, tags, callback) {
                         var processRow = function (input) {
                             equipment.push(input);
                             rowsProcessed++;
-                            if (rowsProcessed == rows.length / 17) {
+                            if (rowsProcessed == rows.length) {
                                 finishQuery();
                             }
                         }
@@ -565,6 +568,7 @@ function shallowQuery(tables, tags, callback) {
                         console.log("shallowQuery ABILITY SQL ERROR: " + err)
                     }
                     else {
+                      console.log("table query finished"+rows.length);
                         if (rows.length == 0) {
                             finishQuery();
                         }
@@ -572,7 +576,7 @@ function shallowQuery(tables, tags, callback) {
                         var processRow = function (input) {
                             monsters.push(input);
                             rowsProcessed++;
-                            if (rowsProcessed == rows.length / 17) {
+                            if (rowsProcessed == rows.length) {
                                 finishQuery();
                             }
                         }
@@ -588,6 +592,7 @@ function shallowQuery(tables, tags, callback) {
                         console.log("shallowQuery ABILITY SQL ERROR: " + err)
                     }
                     else {
+                      console.log("table query finished");
                         if (rows.length == 0) {
                             finishQuery();
                         }
@@ -595,7 +600,7 @@ function shallowQuery(tables, tags, callback) {
                         var processRow = function (input) {
                             npcs.push(input);
                             rowsProcessed++;
-                            if (rowsProcessed == rows.length / 17) {
+                            if (rowsProcessed == rows.length) {
                                 finishQuery();
                             }
                         }
@@ -611,6 +616,7 @@ function shallowQuery(tables, tags, callback) {
                         console.log("shallowQuery ABILITY SQL ERROR: " + err)
                     }
                     else {
+                      console.log("table query finished");
                         if (rows.length == 0) {
                             finishQuery();
                         }
@@ -618,7 +624,7 @@ function shallowQuery(tables, tags, callback) {
                         var processRow = function (input) {
                             talents.push(input);
                             rowsProcessed++;
-                            if (rowsProcessed == rows.length / 17) {
+                            if (rowsProcessed == rows.length) {
                                 finishQuery();
                             }
                         }
@@ -648,7 +654,7 @@ function shallowQuery(tables, tags, callback) {
                 itemName = "TALENT_NAME";
                 queryFunction = queryTalents;
             }
-            var sql = "SELECT O.* FROM " + table + " O";
+            var sql = "SELECT DISTINCT O.* FROM " + table + " O";
             if (tags != null && tags.length > 0) {
                 sql += ", ENTITY_TAGS T  WHERE ";
                 for (var i = 0; i < tags.length; i++) {

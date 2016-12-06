@@ -265,19 +265,26 @@ $(document).ready(function() {
         }
         console.log(tables);
         console.log(suggest.getValue());
-        socket.emit("ShallowQueryRequest", ["MONSTERS"], ["GOBLIN"]);
+        socket.emit("ShallowQueryRequest", tables, suggest.getValue());
     }
 
     socket.on("ShallowQueryResult", function(tableList) {
         var content = "<h2>Search Result</h2>";
         var j;
         if ($("#chkMonster").prop('checked')) {
-            content = content + "<div class='row'><h3>Monsters</h3>";
+            content = content + "<div class='row' style='margin-left: 20px;'><h3>Monsters</h3>";
             for (j = 0; j < tableList[2].length; j++) {
-                content = content + tableList[2][j].MonsterName + " ";
-                content = content + tableList[2][j].AC + " ";
+                content = content + '<div class="row">'
+                content = content + '<h4>' + tableList[2][j].MonsterName + "</h4>";
                 content = content + tableList[2][j].Description + "<br>";
-            }
+                content = content + tableList[2][j].Flavor + "<br>";
+                content = content + '<div id="statsTable" class="col-md-2 table-responsive"><table class="table table-striped"><tr><th>Hit Points:</th><td id="hp">' + tableList[2][j].HP;
+                content = content + '</tr><tr><th>Armor Class:</th><td>' + tableList[2][j].AC + '</td></tr><tr><th>Reflex:</th><td>' + tableList[2][j].Reflex;
+                content = content + '</td></tr><tr><th>Fortitude:</th><td>' +tableList[2][j].Fortitude + '</td></tr><tr><th>Will:</th><td>'+tableList[2][j].Will;
+                content = content + '</td></tr><tr><th>Movement:</th><td >' +tableList[2][j].Movement + '</td></tr><tr><th>Initiative:</th><td >+' +tableList[2][j].Initiative + '</td></tr></table>';
+                content = content + '</div></div>';
+              }
+              content = content + '</div>';
         }
         if ($("#chkNPC").prop('checked')) {
             content = content + "<div class='row'><h3>Characters</h3>";
